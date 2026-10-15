@@ -69,6 +69,18 @@ config OPENTHREAD_RADIO_VENDOR_IMPLEMENTATION_FILE
 	  It will be compiled instead of the default radio.c driver
 	  during the build.
 
+config OPENTHREAD_PLATFORM_CUSTOM_ALARM
+	bool "Use an external custom alarm implementation"
+	help
+	  Use an external (e.g. board/driver-specific) implementation of the
+	  OpenThread alarm platform APIs instead of Zephyr's built-in
+	  k_timer-based one. When enabled, alarm_milli.c and alarm_micro.c (or
+	  alarm_counter.c) are NOT compiled; the external module must itself
+	  provide otPlatAlarmMilli*/otPlatAlarmMicro*,
+	  platformAlarmMilliInit/platformAlarmMicroInit,
+	  platformAlarmMilliProcess/platformAlarmMicroProcess,
+	  alarm_milli_set_time_offset_ms and otPlatTimeGetXtalAccuracy.
+
 config OPENTHREAD_MANUAL_START
 	bool "Start OpenThread stack manually"
 	help
